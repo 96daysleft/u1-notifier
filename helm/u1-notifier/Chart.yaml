@@ -1,0 +1,6 @@
+apiVersion: v2
+name: u1-notifier
+description: Snapmaker U1 Moonraker WebSocket alert notifier for Discord
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

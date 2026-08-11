@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "u1-notifier.fullname" . }}
+  labels:
+    {{- include "u1-notifier.labels" . | nindent 4 }}
+data:
+  PRINTER_IP: {{ .Values.printer.ip | quote }}
+  PRINTER_PORT: {{ .Values.printer.port | quote }}
+  POLL_INTERVAL_MINUTES: {{ .Values.pollIntervalMinutes | quote }}
+  MAX_ALERTS_PER_POLL: {{ .Values.maxAlertsPerPoll | quote }}
+  LOG_LEVEL: {{ .Values.logLevel | quote }}
+  SKIP_CONNECTION_TEST: {{ .Values.skipConnectionTest | quote }}
+  NOTIFY_ON_PRINT_START: {{ .Values.notify.onStart | quote }}
+  NOTIFY_ON_PRINT_FINISH: {{ .Values.notify.onShutdown | quote }}
+  NOTIFY_WITH_SNAPSHOT: {{ .Values.notify.withSnapshot | quote }}
+  {{- if .Values.camera.snapshotUrl }}
+  CAMERA_SNAPSHOT_URL: {{ .Values.camera.snapshotUrl | quote }}
+  {{- end }}

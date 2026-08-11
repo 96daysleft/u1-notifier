@@ -1,0 +1,48 @@
+image:
+  repository: ghcr.io/96daysleft/u1-notifier
+  tag: latest
+  pullPolicy: Always
+
+# Snapmaker U1 printer connection
+printer:
+  ip: "192.168.1.1"
+  port: "80"
+  # apiKey and discordWebhookUrl are sensitive — set via --set or existingSecret
+  apiKey: ""
+  discordWebhookUrl: ""
+  # existingSecret: if set, use this pre-existing Secret instead of creating one.
+  # The secret must contain keys: MOONRAKER_API_KEY and DISCORD_WEBHOOK_URL
+  existingSecret: ""
+
+# Alert behaviour
+notify:
+  onStart: "true"
+  onShutdown: "true"
+  withSnapshot: "true"
+
+# Camera snapshot attached to Discord alerts
+# snapshotUrl: leave empty to default to http://<printer.ip>/server/files/camera/monitor.jpg
+camera:
+  snapshotUrl: ""
+
+# Polling
+pollIntervalMinutes: "5"
+maxAlertsPerPoll: "10"
+
+# Misc
+logLevel: "INFO"
+skipConnectionTest: "true"
+
+# Pod settings
+replicaCount: 1
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+
+resources: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
