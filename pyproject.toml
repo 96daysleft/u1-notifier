@@ -28,9 +28,14 @@ dependencies = [
 ]
 
 [project.scripts]
-u1-notifier = "main:main"
+u1-notifier = "main:run"
+
+[tool.setuptools]
+py-modules = ["main"]
 
 [tool.setuptools.packages.find]
-where = ["."]
+include = ["src*"]
 
 [tool.setuptools_scm]
+# Docker builds have no .git: pass SETUPTOOLS_SCM_PRETEND_VERSION instead
+fallback_version = "0.0.0"

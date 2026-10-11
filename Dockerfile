@@ -15,17 +15,21 @@ RUN apt-get update && \
         python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
-COPY requirements.txt ./
+# setuptools-scm can't see .git inside the build: the release workflow
+# passes the tag version here.
+ARG VERSION=0.0.0
+ENV SETUPTOOLS_SCM_PRETEND_VERSION=${VERSION}
 
-# Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
+# Copy package metadata and application code
+COPY pyproject.toml README.md ./
 COPY src/ ./src/
 COPY main.py ./
 COPY .env.example ./
+
+# Install the package and its dependencies from pyproject.toml
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir . && \
+    rm -rf build *.egg-info
 
 # Change ownership of app directory
 RUN chown -R app:app /app

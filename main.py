@@ -15,7 +15,9 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from src.service import main
 
-if __name__ == '__main__':
+
+def run() -> None:
+    """Console-script entry point."""
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
@@ -24,3 +26,7 @@ if __name__ == '__main__':
     except Exception as e:
         print(f"❌ Failed to start service: {e}")
         sys.exit(1)
+
+
+if __name__ == '__main__':
+    run()

@@ -1,8 +1,0 @@
-# WebSocket client based on OctoEverywhere's implementation
-websockets>=11.0.3
-requests>=2.31.0
-python-dotenv>=1.0.0
-pydantic>=2.5.0
-structlog>=23.2.0
-colorama>=0.4.6
-aiohttp>=3.9.1
